@@ -42,8 +42,8 @@ int main(int argc, char** argv)
 {
 	//return runMnist(argc, argv);
 
-	samplesCommon::OnnxSampleParams params = initializeParams("F:/TensorRT-7.1.3.4/data/mnist",
-		"mnist.onnx", "Input3", "Plus214_Output_0");
+	//samplesCommon::OnnxSampleParams params = initializeParams("F:/TensorRT-7.1.3.4/data/mnist", "mnist.onnx");
+	samplesCommon::OnnxSampleParams params = initializeParams("C:/Users/Wind/Downloads", "resnet50_v1.onnx");
 
 	OnnxModel model(params);
 

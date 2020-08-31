@@ -42,10 +42,12 @@ bool OnnxModel::build()
 
 	//assert(network->getNbInputs() == 1);
 	mInputDims = network->getInput(0)->getDimensions();
+	mInputName = network->getInput(0)->getName();
 	//assert(mInputDims.nbDims == 4);
 
 	//assert(network->getNbOutputs() == 1);
 	mOutputDims = network->getOutput(0)->getDimensions();
+	mOutputName = network->getOutput(0)->getName();
 	//assert(mOutputDims.nbDims == 2);
 
 	return true;
@@ -106,7 +108,7 @@ bool OnnxModel::dummyInfer()
 
 	xt::xarray<float> dummyInput = xt::ones<float>(shape);
 
-	float* hostDataBuffer = static_cast<float*>(buffers.getHostBuffer(mParams.inputTensorNames[0]));
+	float* hostDataBuffer = static_cast<float*>(buffers.getHostBuffer(mInputName));
 
 	memcpy(hostDataBuffer, dummyInput.data(), totalSize * sizeof(float));
 
@@ -119,13 +121,14 @@ bool OnnxModel::dummyInfer()
 	return status;
 }
 
-samplesCommon::OnnxSampleParams initializeParams(string dataDir, string fileName, string inputName, string outputName)
+//samplesCommon::OnnxSampleParams initializeParams(string dataDir, string fileName, string inputName, string outputName)
+samplesCommon::OnnxSampleParams initializeParams(string dataDir, string fileName)
 {
 	samplesCommon::OnnxSampleParams params;
 	params.dataDirs.push_back(dataDir);
 	params.onnxFileName = fileName;
-	params.inputTensorNames.push_back(inputName);
-	params.outputTensorNames.push_back(outputName);
+	/*params.inputTensorNames.push_back(inputName);
+	params.outputTensorNames.push_back(outputName);*/
 
 	return params;
 }

@@ -40,6 +40,7 @@ public:
 
 	nvinfer1::Dims mInputDims;
 	nvinfer1::Dims mOutputDims;
+	string mInputName, mOutputName;
 
 	int mNumber{ 0 };
 
@@ -57,4 +58,4 @@ public:
 
 };
 
-samplesCommon::OnnxSampleParams initializeParams(string dataDir, string fileName, string inputName, string outputName);
+samplesCommon::OnnxSampleParams initializeParams(string dataDir, string fileName);
